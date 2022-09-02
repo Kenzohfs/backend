@@ -11,5 +11,3 @@ app.use("/api", router);
 app.listen(port, () => {
     console.log(`App listening on http://localhost:${port}`);
 })
-
-module.exports = app;
