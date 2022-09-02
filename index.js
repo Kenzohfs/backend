@@ -10,6 +10,10 @@ app.use(cors());
 
 app.use("/api", router);
 
+app.get("/", (req, res) => {
+    res.json("Hellow World");
+})
+
 app.listen(port, () => {
     console.log(`App listening on http://localhost:${port}`);
 })
