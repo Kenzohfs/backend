@@ -1,8 +1,8 @@
 const crud = require("../../CRUD/server");
 const tabela = "malha"
 const tabelaFio = "fio"
-const fios_da_malha = require("../fios_da_malha/fios_da_malha.handler");
-const malha_do_cliente = require("../malha_do_cliente/malha_do_cliente.handler");
+// const fios_da_malha = require("../fios_da_malha/fios_da_malha.handler");
+// const malha_do_cliente = require("../malha_do_cliente/malha_do_cliente.handler");
 
 async function procurarMalhas() {
     return await crud.buscar(tabela);
@@ -38,7 +38,7 @@ async function criarMalha(dados) {
                         idFio: fioDaMalha,
                         idMalha: malhaSalva.id,
                     }
-                    await fios_da_malha.criarFios_Da_Malha(dadosNovo);
+                    // await fios_da_malha.criarFios_Da_Malha(dadosNovo);
                 }
             } else {
                 return "Erro! Há fios inválidos!"
@@ -47,7 +47,7 @@ async function criarMalha(dados) {
                 idMalha: malhaSalva.id,
                 idCliente: malha.idCliente
             }
-            await malha_do_cliente.criarMalha_Do_Cliente(dadosNovo);
+            // await malha_do_cliente.criarMalha_Do_Cliente(dadosNovo);
             return malhaSalva;
         } else {
             return "Erro! A descrição dessa malha já existe!"
