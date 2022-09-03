@@ -5,7 +5,7 @@ const fios_da_malha = require("../fios_da_malha/fios_da_malha.handler");
 const malha_do_cliente = require("../malha_do_cliente/malha_do_cliente.handler");
 
 async function procurarMalhas() {
-    return Promise.resolve("dadasdasdasdasdas");
+    return await crud.buscar(tabela);
 }
 
 async function procurarMalha(id) {
