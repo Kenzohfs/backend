@@ -58,7 +58,7 @@ async function buscar(nomeTabela) {
     //     }
     //     lista.push(dado);
     // });
-    return lista;
+    return Promise.resolve(lista);
 }
 
 async function buscarPorId(nomeTabela, id) {
