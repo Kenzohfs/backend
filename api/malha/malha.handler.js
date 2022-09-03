@@ -1,11 +1,11 @@
-const crud = require("../../CRUD/server");
+// const crud = require("../../CRUD/server");
 const tabela = "malha"
 const tabelaFio = "fio"
 // const fios_da_malha = require("../fios_da_malha/fios_da_malha.handler");
 // const malha_do_cliente = require("../malha_do_cliente/malha_do_cliente.handler");
 
 async function procurarMalhas() {
-    return await crud.buscar(tabela);
+    return Promise.resolve("dadasdasdasdasdas");
 }
 
 // async function procurarMalha(id) {
