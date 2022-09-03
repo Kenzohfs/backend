@@ -8,100 +8,100 @@ async function procurarMalhas() {
     return await crud.buscar(tabela);
 }
 
-async function procurarMalha(id) {
-    const listaMalhas = await procurarMalhas(tabela);
+// async function procurarMalha(id) {
+//     const listaMalhas = await procurarMalhas(tabela);
 
-    if (listaMalhas.filter((Malhas) => Malhas.id == id).length == 0) {
-        return "Erro! Este ID não foi encontrado!"
-    } else {
-        return await crud.buscarPorId(tabela, id);
-    }
-}
+//     if (listaMalhas.filter((Malhas) => Malhas.id == id).length == 0) {
+//         return "Erro! Este ID não foi encontrado!"
+//     } else {
+//         return await crud.buscarPorId(tabela, id);
+//     }
+// }
 
-async function criarMalha(dados) {
-    const listaMalhas = await procurarMalhas(tabela);
-    const cliente = await crud.buscar("cliente");
-    const malha = dados;
+// async function criarMalha(dados) {
+//     const listaMalhas = await procurarMalhas(tabela);
+//     const cliente = await crud.buscar("cliente");
+//     const malha = dados;
 
-    if (dados.descricao) {
-        if (listaMalhas.filter((Malhas) => Malhas.descricao == dados.descricao).length == 0
-            && cliente.findIndex(c => c.id == malha.idCliente) != -1) {
-            let malhaSalva;
-            if (await fiosValido(malha.idFio)) {
+//     if (dados.descricao) {
+//         if (listaMalhas.filter((Malhas) => Malhas.descricao == dados.descricao).length == 0
+//             && cliente.findIndex(c => c.id == malha.idCliente) != -1) {
+//             let malhaSalva;
+//             if (await fiosValido(malha.idFio)) {
 
-                malhaSalva = await crud.salvar(tabela, false, { descricao: dados.descricao });
+//                 malhaSalva = await crud.salvar(tabela, false, { descricao: dados.descricao });
 
-                for (let fioDaMalha of dados.idFio) {
-                    console.log(fioDaMalha)
-                    console.log(malhaSalva)
-                    const dadosNovo = {
-                        idFio: fioDaMalha,
-                        idMalha: malhaSalva.id,
-                    }
-                    // await fios_da_malha.criarFios_Da_Malha(dadosNovo);
-                }
-            } else {
-                return "Erro! Há fios inválidos!"
-            }
-            dadosNovo = {
-                idMalha: malhaSalva.id,
-                idCliente: malha.idCliente
-            }
-            // await malha_do_cliente.criarMalha_Do_Cliente(dadosNovo);
-            return malhaSalva;
-        } else {
-            return "Erro! A descrição dessa malha já existe!"
-        }
-    } else {
-        return "Erro! Falta algum dado!"
-    }
+//                 for (let fioDaMalha of dados.idFio) {
+//                     console.log(fioDaMalha)
+//                     console.log(malhaSalva)
+//                     const dadosNovo = {
+//                         idFio: fioDaMalha,
+//                         idMalha: malhaSalva.id,
+//                     }
+//                     // await fios_da_malha.criarFios_Da_Malha(dadosNovo);
+//                 }
+//             } else {
+//                 return "Erro! Há fios inválidos!"
+//             }
+//             dadosNovo = {
+//                 idMalha: malhaSalva.id,
+//                 idCliente: malha.idCliente
+//             }
+//             // await malha_do_cliente.criarMalha_Do_Cliente(dadosNovo);
+//             return malhaSalva;
+//         } else {
+//             return "Erro! A descrição dessa malha já existe!"
+//         }
+//     } else {
+//         return "Erro! Falta algum dado!"
+//     }
 
-}
+// }
 
-async function fiosValido(listaIdFios) {
-    const listaFios = await crud.buscar(tabelaFio);
+// async function fiosValido(listaIdFios) {
+//     const listaFios = await crud.buscar(tabelaFio);
 
-    let valido, varReturn = true;
-    for (let idFio of listaIdFios) {
-        valido = false;
-        for (let itemFio of listaFios) {
-            if (idFio == itemFio.id) {
-                valido = true;
-            }
-        }
-        if (!valido) {
-            varReturn = false;
-        }
-    }
+//     let valido, varReturn = true;
+//     for (let idFio of listaIdFios) {
+//         valido = false;
+//         for (let itemFio of listaFios) {
+//             if (idFio == itemFio.id) {
+//                 valido = true;
+//             }
+//         }
+//         if (!valido) {
+//             varReturn = false;
+//         }
+//     }
 
-    return varReturn;
-}
+//     return varReturn;
+// }
 
-async function editarMalha(dados, id) {
-    const listaMalhas = await procurarMalhas(tabela);
+// async function editarMalha(dados, id) {
+//     const listaMalhas = await procurarMalhas(tabela);
 
-    if (dados.descricao) {
-        if (listaMalhas.filter((Malhas) => Malhas.descricao == dados.descricao).length == 0) {
-            return await crud.salvar(tabela, id, dados);
-        } else {
-            return "Erro! A descrição dessa malha já existe!"
-        }
-    } else {
-        return "Erro! Falta algum dado!"
-    }
-}
+//     if (dados.descricao) {
+//         if (listaMalhas.filter((Malhas) => Malhas.descricao == dados.descricao).length == 0) {
+//             return await crud.salvar(tabela, id, dados);
+//         } else {
+//             return "Erro! A descrição dessa malha já existe!"
+//         }
+//     } else {
+//         return "Erro! Falta algum dado!"
+//     }
+// }
 
-async function deletarMalha(id) {
-    const listaMalhas = await procurarMalhas(tabela);
+// async function deletarMalha(id) {
+//     const listaMalhas = await procurarMalhas(tabela);
 
-    if (listaMalhas.filter((Malhas) => Malhas.id == id).length == 0) {
-        return "Erro! Este ID não foi encontrado!"
-    } else {
-        return await crud.remover(tabela, id);
-    }
-}
+//     if (listaMalhas.filter((Malhas) => Malhas.id == id).length == 0) {
+//         return "Erro! Este ID não foi encontrado!"
+//     } else {
+//         return await crud.remover(tabela, id);
+//     }
+// }
 
-
+// , procurarMalha, criarMalha, editarMalha, deletarMalha
 module.exports = {
-    procurarMalhas, procurarMalha, criarMalha, editarMalha, deletarMalha
+    procurarMalhas
 };
