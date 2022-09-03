@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const malhaHandler = require('./malha.handler')
+// const malhaHandler = require('./malha.handler')
 
 router.get("/", async (req, res) => {
-    res.json(await malhaHandler.procurarMalhas())
+    res.json("asdfjasdasdjknasjkn")
 })
 
 // router.get("/:id", async(req, res) => {
