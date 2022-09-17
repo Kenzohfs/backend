@@ -13,12 +13,13 @@ const {
 } = require("firebase/firestore/lite");
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB60rXqOs2WuO_Sa4rSbabAjh6kccwG2-Y",
-  authDomain: "tear-system.firebaseapp.com",
-  projectId: "tear-system",
-  storageBucket: "tear-system.appspot.com",
-  messagingSenderId: "167425157602",
-  appId: "1:167425157602:web:0d152536885b72c3bd31bb"
+    apiKey: "AIzaSyBx6jqQeNr_9QxnqbdSGFHsNQhEgHoyO2Y",
+    authDomain: "freeze-day.firebaseapp.com",
+    projectId: "freeze-day",
+    storageBucket: "freeze-day.appspot.com",
+    messagingSenderId: "919754769882",
+    appId: "1:919754769882:web:99dd09f824b43ca2052ce3",
+    measurementId: "G-EW1PB6KS2C"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -43,21 +44,21 @@ async function salvar(nomeTabela, id, dado) {
 }
 
 async function buscar(nomeTabela) {
-    // const tabelaReferencia = collection(db, nomeTabela);
+    const tabelaReferencia = collection(db, nomeTabela);
 
-    // const q = query(tabelaReferencia);
+    const q = query(tabelaReferencia);
 
-    // const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(q);
 
     const lista = [];
 
-    // querySnapshot.forEach((doc) => {
-    //     const dado = {
-    //         ...doc.data(),
-    //         id: doc.id
-    //     }
-    //     lista.push(dado);
-    // });
+    querySnapshot.forEach((doc) => {
+        const dado = {
+            ...doc.data(),
+            id: doc.id
+        }
+        lista.push(dado);
+    });
     return Promise.resolve(lista);
 }
 
@@ -78,9 +79,28 @@ async function remover(nomeTabela, id) {
     }
 }
 
+async function buscarComFiltro(nomeTabela, operador, nomeDado, dado) {
+    const tableRef = collection(db, nomeTabela);
+    const q = query(tableRef, where(nomeDado, operador, dado));
+    const data = await getDocs(q)
+
+    const lista = [];
+
+    data.forEach((doc) => {
+        const data = {
+            ...doc.data(),
+            id: doc.id
+        }
+        lista.push(data);
+    })
+
+    return lista;
+}
+
 module.exports = {
     salvar,
     buscar,
     buscarPorId,
+    buscarComFiltro,
     remover
 }
